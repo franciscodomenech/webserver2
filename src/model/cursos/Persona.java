@@ -1,5 +1,6 @@
 package model.cursos;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Persona {
@@ -83,6 +84,11 @@ public class Persona {
 			}catch(NumberFormatException nfe) {}
 		}
 		return isok;
+	}
+	
+	public String getBeatyDate() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return format.format(fecha.getTime());
 	}
 
 }

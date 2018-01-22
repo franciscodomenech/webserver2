@@ -1,7 +1,9 @@
 package model.cursos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import model.Centro;
 import model.questions.StatusResponse;
@@ -132,7 +134,7 @@ public class Curso implements ICurso {
 	}
 	
 	@Override
-	public boolean matricula(String nombre, String apellidos, String nif, String datestr) {
+	public synchronized boolean matricula(String nombre, String apellidos, String nif, String datestr) {
 		if(!alumnos.containsKey(nif)) {
 			String[] tks = datestr.split("-");
 			int day = getPartDateFromTks(tks,2);
@@ -143,6 +145,36 @@ public class Curso implements ICurso {
 		}else
 			return false;
 		
+	}
+	
+	private boolean CheckKeysAlumno(Alumno a,String[] keys) {
+		boolean ischecked = true;
+		for(int i=0;(i<keys.length && ischecked);i++) {
+			String key = keys[i];
+			ischecked = a.getNombre().contains(key) || a.getApellidos().contains(key) || a.getNif().contains(key);
+		}
+		return ischecked;
+	}
+	
+	private boolean checkFilter(Alumno a,String tosearch) {
+		String cleanSearch = tosearch.trim();
+		String[] keysToSeach = cleanSearch.split(" ");
+		return cleanSearch.isEmpty() || CheckKeysAlumno(a,keysToSeach);
+	}
+	
+	@Override
+	public List<Alumno> filtrar(String tosearch) {
+		ArrayList<Alumno> lista = new ArrayList<Alumno>();
+		Iterator<String> it = alumnos.keySet().iterator();
+		while(it.hasNext()) {
+			String dni = it.next();
+			synchronized(alumnos) {
+				Alumno a = alumnos.get(dni);
+				if(a!=null && checkFilter(a,tosearch))
+					lista.add(a);
+			}
+		}
+		return lista;
 	}
 	
 

@@ -1,6 +1,7 @@
 package model.cursos;
 
 import java.util.HashMap;
+import java.util.List;
 
 import model.questions.StatusResponse;
 
@@ -21,4 +22,6 @@ public interface ICurso {
 	public boolean borrarAlumno(String nif);
 	
 	public String processResponse(Object r,int op);
+	
+	public List<Alumno> filtrar(String tosearch);
 }

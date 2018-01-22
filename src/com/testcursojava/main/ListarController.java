@@ -29,7 +29,14 @@ public class ListarController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Curso c = (Curso) request.getSession().getAttribute("curso");
-		response.getWriter().append("Served at: ").append(c.toString());
+		String tosearch = request.getParameter("valuesearchin");
+		if(tosearch==null)
+			tosearch = "";
+		else
+			request.getSession().setAttribute("valuesearch", tosearch);
+		request.setAttribute("alumnos", c.filtrar(tosearch));
+		request.setAttribute("valuesearch", tosearch);
+		request.getRequestDispatcher("Listar.jsp").forward(request, response);
 	}
 
 }
