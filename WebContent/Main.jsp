@@ -11,7 +11,7 @@
 <% Integer totalCursos = (Integer)request.getAttribute("totalCursos");
 	for(int i=0;i<totalCursos;i++){
 %>
-	<li><a>CURSO <%= i %></a></li>
+	<li><a href="SelectCursoControler?p=<%= i %>">CURSO <%= i+1 %></a></li>
 <% } %>
 </ul>
 </body>

@@ -18,6 +18,8 @@ public class Centro implements ICentro {
 	public static final int OP_MOSTRAR_ALUMNO = 4;
 	public static final int OP_DELETE_ALUMNO = 5;
 	
+	private static Centro INSTANCE;
+	
 	private MainQuestions questions;
 	
 	private Curso[] cursos;
@@ -28,7 +30,7 @@ public class Centro implements ICentro {
 		logged = true;
 		cursos = new Curso[NUM_CURSOS];
 		for(int i=0;i<cursos.length;i++) {
-			Curso c = new Curso();
+			Curso c = new Curso(i);
 			Profesor profe = new Profesor();
 			profe.setNombre("Profe "+i);
 			c.setProfesor(profe);
@@ -77,6 +79,20 @@ public class Centro implements ICentro {
 	
 	public int getTotalCursos() {
 		return cursos.length;
+	}
+	
+	public Curso getCurso(int p) {
+		return cursos[p];
+	}
+	
+	public synchronized static Centro getInstance() {
+		if(INSTANCE==null)
+			INSTANCE = new Centro();
+		return INSTANCE;
+	}
+	
+	public static Curso getCurso(String p) {
+		return getInstance().getCurso(Integer.parseInt(p));
 	}
 
 }

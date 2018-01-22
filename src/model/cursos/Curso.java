@@ -10,9 +10,15 @@ public class Curso implements ICurso {
 	
 	private HashMap<String,Alumno> alumnos;
 	private Profesor profesor;
+	private int id;
 	
-	public Curso() {
+	public Curso(int id) {
+		this.id = id;
 		alumnos = new HashMap<String,Alumno>();
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	@Override
