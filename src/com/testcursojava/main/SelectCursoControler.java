@@ -32,7 +32,8 @@ public class SelectCursoControler extends HttpServlet {
 		
 		Curso c = Centro.getCurso(request.getParameter("p"));
 		request.getSession().setAttribute("curso", c);
-		request.setAttribute("idcurso", c.getId());
+		request.setAttribute("ops", Centro.getOperaciones());
+		request.getRequestDispatcher("Operaciones.jsp").forward(request, response);
 	}
 
 }

@@ -18,6 +18,8 @@ public class Centro implements ICentro {
 	public static final int OP_MOSTRAR_ALUMNO = 4;
 	public static final int OP_DELETE_ALUMNO = 5;
 	
+	private final String[] operaciones = {"Matricular","Ver"};
+	
 	private static Centro INSTANCE;
 	
 	private MainQuestions questions;
@@ -93,6 +95,10 @@ public class Centro implements ICentro {
 	
 	public static Curso getCurso(String p) {
 		return getInstance().getCurso(Integer.parseInt(p));
+	}
+	
+	public static String[] getOperaciones() {
+		return getInstance().operaciones;
 	}
 
 }
