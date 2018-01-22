@@ -20,7 +20,7 @@ for(int i=0;i<alumnos.size();i++){
 %>
 <tr>
 	<td><%= a.getNombre() %></td><td><%= a.getApellidos() %></td>
-	<td><%= a.getNif() %></td><td><%= a.getBeatyDate() %></td><td></td><td></td>
+	<td><%= a.getNif() %></td><td><%= a.getBeatyDate() %></td><td><a href="RemoveController?nif=<%= a.getNif() %>">ELIMINAR</a></td><td></td>
 </tr>
 <% } %>
 </tbody>
