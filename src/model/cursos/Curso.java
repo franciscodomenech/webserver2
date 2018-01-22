@@ -122,6 +122,28 @@ public class Curso implements ICurso {
 		}else
 			return "No encontrado";
 	}
+
+	private int getPartDateFromTks(String[] tks,int p) {
+		int num = 1;
+		try {
+			num = tks.length>p?Integer.parseInt(tks[p]):1;
+		}catch(NumberFormatException nfe) {}
+		return num;
+	}
+	
+	@Override
+	public boolean matricula(String nombre, String apellidos, String nif, String datestr) {
+		if(!alumnos.containsKey(nif)) {
+			String[] tks = datestr.split("-");
+			int day = getPartDateFromTks(tks,2);
+			int month = getPartDateFromTks(tks,1);
+			int year = getPartDateFromTks(tks,0);
+			alumnos.put(nif, new Alumno(nombre,apellidos,nif,day,month,year));
+			return true;
+		}else
+			return false;
+		
+	}
 	
 
 }

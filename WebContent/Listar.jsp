@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<ol>
-<% 
-	String[] ops = (String[])request.getAttribute("ops");
-	for(int i=0;i<ops.length;i++){
-%>
-<li><a href="OpController?op=<%=i%>"><%=ops[i]%></a></li>
-<% } %>
-</ol>
+
 </body>
 </html>

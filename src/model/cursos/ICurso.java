@@ -6,6 +6,7 @@ import model.questions.StatusResponse;
 
 public interface ICurso {
 	public void matricula(Alumno alumno);
+	public boolean matricula(String nombre,String apellidos,String nif,String datestr);
 	public void pasarLista(HashMap<String,Boolean> asistencia);
 	public void evaluar(int evaluacion,HashMap<String,Float> notas);
 	//Devuelve null en caso de no econtrarlo
